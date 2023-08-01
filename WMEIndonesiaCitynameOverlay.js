@@ -6,6 +6,7 @@
 // @author       hardian-n
 // @include      /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/?.*$/
 // @require      https://greasyfork.org/scripts/24851-wazewrap/code/WazeWrap.js
+// @require      https://greasyfork.org/scripts/369729-wme-cities-overlay-db/code/WME%20Cities%20Overlay%20DB.js
 // @license      GNU GPLv3
 // @grant        GM_xmlhttpRequest
 // @connect      api.github.com
@@ -27,7 +28,7 @@
   'use strict';
 
   var _color = '#E6E6E6';
-  var _settingsStoreName = '_wme_cities';
+  var _settingsStoreName = '_wme_kecamatan';
   var _settings;
   var _features;
   var _kml;
@@ -452,6 +453,9 @@
   async function updateCityPolygons(){
       if(currState != W.model.states.top.name)
       {
+          console.log('currState:', currState);
+          console.log('W.model.states.top.name:', W.model.states.top.name);
+          
           _layer.destroyFeatures();
           currState = W.model.states.top.name;
           let countryAbbr = W.model.countries.top.abbr;
@@ -470,6 +474,7 @@
 
                   console.log('countryAbbr:', countryAbbr);
                   console.log('stateAbbr:', stateAbbr);
+                  console.log('idbKeyval:', idbKeyval);
                   console.log('array:', `${countryAbbr}_states_cities`);
 
                   var request = await idbKeyval.get(`${countryAbbr}_states_cities`, stateAbbr);
@@ -479,6 +484,7 @@
                   if(!request){
                       let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/Waze_Cityname_Indonesia/master/KMLs/${countryAbbr}/${stateAbbr}_Cities.kml`);
                       _kml = kml;
+                      console.log('kml:', 'dapet kml');
                       updatePolygons();
 
                       await idbKeyval.set(`${countryAbbr}_states_cities`, {

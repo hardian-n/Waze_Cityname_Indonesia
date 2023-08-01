@@ -41,8 +41,6 @@
 
   let currState = "";
   let currCity = "";
-  let _US_States = {};
-  let _MX_States = {};
   let _ID_States = {};
   let kmlCache = {};
 
@@ -184,12 +182,8 @@
       let updatedStates = "";
       let countryAbbrObj;
 
-      if(countryAbbr === "US")
-          countryAbbrObj = _US_States;
-      else if(countryAbbr === "MX")
-          countryAbbrObj = _MX_States;
-      else if(countryAbbr === "ID")
-      countryAbbrObj = _ID_States;
+      if(countryAbbr === "ID")
+          countryAbbrObj = _ID_States;
 
       let KMLinfoArr = await fetch(`https://api.github.com/repos/hardian-n/Waze_Cityname_Indonesia/contents/KMLs/${countryAbbr}`);
       KMLinfoArr = $.parseJSON(KMLinfoArr);
@@ -257,32 +251,6 @@
   }*/
 
   function init() {
-      _US_States = {
-          Alabama:"AL", Alaska:"AK", Arizona:"AZ", Arkansas:"AR", California:"CA", Colorado:"CO", Connecticut:"CT",
-          "District of Columbia":"DC", Delaware:"DE", Florida:"FL", Georgia:"GA", Hawaii:"HI", Idaho:"ID", Illinois:"IL", Indiana:"IN",
-          Iowa:"IA", Kansas:"KS", Kentucky:"KY", Louisiana:"LA", Maine:"ME", Maryland:"MD", Massachusetts:"MA",
-          Michigan:"MI", Minnesota:"MN", Mississippi:"MS", Missouri:"MO", Montana:"MT", Nebraska:"NE", Nevada:"NV", "New Hampshire":"NH",
-          "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", Ohio:"OH", Oklahoma:"OK", Oregon:"OR", Pennsylvania:"PA",
-          "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", Tennessee:"TN", Texas:"TX", Utah:"UT",
-          Vermont:"VT", Virginia:"VA", Washington:"WA", "West Virginia":"WV", Wisconsin:"WI", Wyoming:"WY",
-          getAbbreviation: function(state) { return this[state];},
-          getStateFromAbbr: function(abbr) { return Object.entries(_US_States).filter(x => {if(x[1] == abbr) return x})[0][0];},
-          getStatesArray: function() { return Object.keys(_US_States).filter(x => {if(typeof _US_States[x] !== "function") return x;});},
-          getStateAbbrArray: function() { return Object.values(_US_States).filter(x => {if(typeof x !== "function") return x;});}
-      };
-
-      _MX_States = {
-      Aguascalientes:"AGS", "Baja California":"BC", "Baja California Sur":"BCS",Campeche:"CAM", "Coahuila de Zaragoza":"COAH", Colima:"COL",
-          Chiapas:"CHIS", Durango:"DGO", "Ciudad de México":"CDMX", "Guanajuato":"GTO", Guerrero:"GRO", Hidalgo:"HGO", Jalisco:"JAL",
-          "Estado de México":"EM", "Michoacán de Ocampo":"MICH", Morelos:"MOR", Nayarit:"NAY", "Nuevo León":"NL", Oaxaca:"OAX", Puebla:"PUE",
-          "Quintana Roo":"QROO", "Querétaro":"QRO", "San Luis Potosí":"SLP", Sinaloa:"SIN", Sonora:"SON", Tabasco:"TAB", Tamaulipas:"TAM", Tlaxcala:"TLAX",
-          "Veracruz Ignacio de la Llave":"VER", "Yucatán":"YUC", "Zacatecas":"ZAC",
-          getAbbreviation: function(state) { return this[state];},
-          getStateFromAbbr: function(abbr) { return Object.entries(_MX_States).filter(x => {if(x[1] == abbr) return x})[0][0];},
-          getStatesArray: function() { return Object.keys(_MX_States).filter(x => {if(typeof _MX_States[x] !== "function") return x;});},
-          getStateAbbrArray: function() { return Object.values(_MX_States).filter(x => {if(typeof x !== "function") return x;});}
-      };
-
       _ID_States = {
           "Yogyakarta":"JOG-1", "DI Yogyakarta":"JOG",
               getAbbreviation: function(state) { return this[state];},
@@ -461,11 +429,7 @@
           let countryAbbr = W.model.countries.top.abbr;
           let stateAbbr;
 
-          if(countryAbbr === "US")
-              stateAbbr = _US_States.getAbbreviation(currState);
-          else if(countryAbbr === "MX")
-              stateAbbr = _MX_States.getAbbreviation(currState);
-          else if(countryAbbr === "ID")
+          if(countryAbbr === "ID")
               stateAbbr = _ID_States.getAbbreviation(currState);
 
           if(typeof stateAbbr !== "undefined"){

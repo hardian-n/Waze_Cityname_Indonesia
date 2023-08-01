@@ -19,7 +19,7 @@ var WazeWrap = {};
 (function() {
     'use strict';
     const MIN_VERSION = '2019.05.01.01';
-    const WW_URL = 'https://cdn.jsdelivr.net/gh/WazeDev/WazeWrap@latest/WazeWrapLib.js'; //'https://cdn.staticaly.com/gh/WazeDev/WazeWrap/master/WazeWrapLib.js?env=dev';
+    const WW_URL = 'https://raw.githubusercontent.com/hardian-n/Waze_Cityname_Indonesia/master/WazeWrapLib.js'; //'https://cdn.staticaly.com/gh/WazeDev/WazeWrap/master/WazeWrapLib.js?env=dev';
 
     async function init(){
         const sandboxed = typeof unsafeWindow !== 'undefined';

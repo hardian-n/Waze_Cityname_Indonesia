@@ -3,7 +3,7 @@
 // @namespace    Komunitas Waze Indonesia
 // @version      2018.06.22.05
 // @description  IndexedDB interface for Cities overlay
-// @author       WazeDev
+// @author       hardian-n
 // @include      /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/?.*$/
 // @license      GNU GPLv3
 // @grant        none
@@ -17,7 +17,7 @@
   function getDB() {
     if (!db) {
       db = new Promise(function(resolve, reject) {
-        var openreq = indexedDB.open('WMECitiesOverlay', 1);
+        var openreq = indexedDB.open('WMEOverlayKecamatan', 1);
 
         openreq.onerror = function() {
           reject(openreq.error);

@@ -2,11 +2,11 @@
 // @name         WME Kecamatan Overlay
 // @namespace    Komunitas Waze Indonesia
 // @version      2023.03.15.01
-// @description  Adds a city overlay for selected states
+// @description  Adds a city overlay for Indonesia Area
 // @author       hardian-n
 // @include      /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/?.*$/
 // @require      https://greasyfork.org/scripts/24851-wazewrap/code/WazeWrap.js
-// @require      https://greasyfork.org/scripts/369729-wme-cities-overlay-db/code/WME%20Cities%20Overlay%20DB.js
+// @require      https://greasyfork.org/scripts/472177-wme-cities-overlay-db-id/code/WME%20Cities%20Overlay%20DB%20ID.user.js
 // @license      GNU GPLv3
 // @grant        GM_xmlhttpRequest
 // @connect      api.github.com

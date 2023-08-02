@@ -252,7 +252,7 @@
 
   function init() {
       _ID_States = {
-          "DI Yogyakarta":"DIY",
+          "DI Yogyakarta":"DIY", "Jawa Tengah":"JATENG", "Jawa Barat":"JABAR","DKI Jakarta":"DKI", "Banten":"BANTEN", "Jawa Timur":"JATIM",
               getAbbreviation: function(state) { return this[state];},
               getStateFromAbbr: function(abbr) { return Object.entries(_ID_States).filter(x => {if(x[1] == abbr) return x})[0][0];},
               getStatesArray: function() { return Object.keys(_ID_States).filter(x => {if(typeof _ID_States[x] !== "function") return x;});},

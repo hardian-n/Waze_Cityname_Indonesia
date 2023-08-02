@@ -48,94 +48,93 @@
   let citiesDB;
 
   function isChecked(checkboxId) {
-      return $('#' + checkboxId).is(':checked');
+    return $('#' + checkboxId).is(':checked');
   }
 
   function setChecked(checkboxId, checked) {
-      $('#' + checkboxId).prop('checked', checked);
+    $('#' + checkboxId).prop('checked', checked);
   }
 
   function loadSettings() {
-      _settings = $.parseJSON(localStorage.getItem(_settingsStoreName));
-      let _defaultsettings = {
-          layerVisible: true,
-          ShowCityLabels: true,
-          FillPolygons: true,
-          HighlightFocusedCity: true,
-          AutoUpdateKMLs: true
-          //hiddenAreas: []
-      };
-      if(!_settings)
-          _settings = _defaultsettings;
-      for (var prop in _defaultsettings) {
-          if (!_settings.hasOwnProperty(prop))
-              _settings[prop] = _defaultsettings[prop];
-      }
+    _settings = $.parseJSON(localStorage.getItem(_settingsStoreName));
+    let _defaultsettings = {
+      layerVisible: true,
+      ShowCityLabels: true,
+      FillPolygons: true,
+      HighlightFocusedCity: true,
+      AutoUpdateKMLs: true
+      //hiddenAreas: []
+    };
+    if(!_settings)
+      _settings = _defaultsettings;
+    for (var prop in _defaultsettings) {
+      if (!_settings.hasOwnProperty(prop))
+        _settings[prop] = _defaultsettings[prop];
+    }
   }
 
   function saveSettings() {
-      if (localStorage) {
-          var settings = {
-              layerVisible: _layer.visibility,
-              ShowCityLabels: _settings.ShowCityLabels,
-              FillPolygons: _settings.FillPolygons,
-              HighlightFocusedCity: _settings.HighlightFocusedCity,
-              AutoUpdateKMLs: _settings.AutoUpdateKMLs
-          };
-          localStorage.setItem(_settingsStoreName, JSON.stringify(settings));
-      }
+    if (localStorage) {
+      var settings = {
+        layerVisible: _layer.visibility,
+        ShowCityLabels: _settings.ShowCityLabels,
+        FillPolygons: _settings.FillPolygons,
+        HighlightFocusedCity: _settings.HighlightFocusedCity,
+        AutoUpdateKMLs: _settings.AutoUpdateKMLs
+      };
+      localStorage.setItem(_settingsStoreName, JSON.stringify(settings));
+    }
   }
 
   function GetFeaturesFromKMLString(strKML) {
-      var format = new OpenLayers.Format.KML({
-          'internalProjection': W.map.getProjectionObject(),
-          'externalProjection': new OpenLayers.Projection("EPSG:4326")
-      });
-      return format.read(strKML);
+    var format = new OpenLayers.Format.KML({
+      'internalProjection': W.map.getProjectionObject(),
+      'externalProjection': new OpenLayers.Projection("EPSG:4326")
+    });
+    return format.read(strKML);
   }
 
   function findCurrCity(){
-      let newCity = "";
-      var mapCenter = new OpenLayers.Geometry.Point(W.map.getCenter().lon,W.map.getCenter().lat);
-      for (var i=0;i<_layer.features.length;i++){
-          var feature = _layer.features[i];
-          if(pointInFeature(feature.geometry, mapCenter)){
-              newCity = feature.attributes.name;
-              break;
-          }
+    let newCity = "";
+    var mapCenter = new OpenLayers.Geometry.Point(W.map.getCenter().lon,W.map.getCenter().lat);
+    for (var i=0;i<_layer.features.length;i++){
+      var feature = _layer.features[i];
+      if(pointInFeature(feature.geometry, mapCenter)){
+        newCity = feature.attributes.name;
+        break;
       }
-      return newCity;
+    }
+    return newCity;
   }
 
   async function updateCitiesLayer(){
-      let newCurrCity = findCurrCity();
-      if(currCity != newCurrCity){
-          currCity = newCurrCity;
-          _layer.redraw();
-      }
-      console.log('Mulai update:', 'updateCityPolygons');
-      await updateCityPolygons();
-      updateDistrictNameDisplay();
-
+    let newCurrCity = findCurrCity();
+    if(currCity != newCurrCity){
+      currCity = newCurrCity;
+      _layer.redraw();
+    }
+    console.log('Mulai update:', 'updateCityPolygons');
+    await updateCityPolygons();
+    updateDistrictNameDisplay();
   }
 
   function updateDistrictNameDisplay(){
-      $('.wmecitiesoverlay-region').remove();
-      if (_layer !== null) {
-          if(_layer.features.length > 0){
-              if(currCity != ""){
-                  let color = '#00ffff';
-                  var $div = $('<div>', {id:'wmecitiesoverlay', class:"wmecitiesoverlay-region", style:'float:left; margin-left:10px;'})//, title:'Click to toggle color on/off for this group'})
-                  .css({color:color, cursor:"pointer"});
-                  //.click(toggleAreaFill);
-                  var $span = $('<span>').css({display:'inline-block'});
-                  $span.text(currCity).appendTo($div);
-                  $('.location-info-region').after($div);
-              }
-          }
+    $('.wmecitiesoverlay-region').remove();
+    if (_layer !== null) {
+      if(_layer.features.length > 0){
+        if(currCity != ""){
+          let color = '#00ffff';
+          var $div = $('<div>', {id:'wmecitiesoverlay', class:"wmecitiesoverlay-region", style:'float:left; margin-left:10px;'})//, title:'Click to toggle color on/off for this group'})
+          .css({color:color, cursor:"pointer"});
+          //.click(toggleAreaFill);
+          var $span = $('<span>').css({display:'inline-block'});
+          $span.text(currCity).appendTo($div);
+          $('.location-info-region').after($div);
+        }
       }
-      else
-          _layer.destroyFeatures();
+    }
+    else
+      _layer.destroyFeatures();
   }
 
   function pointInFeature(geometry, mapCenter){

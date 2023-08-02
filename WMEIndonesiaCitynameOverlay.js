@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME Kecamatan Overlay
 // @namespace    Komunitas Waze Indonesia
-// @version      2023.03.15.01
+// @version      2023.08.01.03
 // @description  Adds a city overlay for Indonesia Area
 // @author       hardian-n
 // @include      /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/?.*$/

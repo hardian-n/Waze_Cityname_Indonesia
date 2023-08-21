@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME Kecamatan Overlay
 // @namespace    Komunitas Waze Indonesia
-// @version      2023.08.21.02
+// @version      2023.08.21.03
 // @description  Adds a city overlay for Indonesia Area
 // @author       hardian-n
 // @include      /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/?.*$/
@@ -125,7 +125,7 @@
           if(_layer.features.length > 0){
               if(currCity != ""){
                   let color = '#00ffff';
-                  var $div = $('<div>', {id:'wmecitiesoverlay', class:"wmecitiesoverlay-region", style:'float:left; margin-left:10px;'})//, title:'Click to toggle color on/off for this group'})
+                  var $div = $('<div>', {id:'wmecitiesoverlay', class:"wmecitiesoverlay-region", style:'float:left; margin-left:10px; font-size: large;'})//, title:'Click to toggle color on/off for this group'})
                   .css({color:color, cursor:"pointer"});
                   //.click(toggleAreaFill);
                   var $span = $('<span>').css({display:'inline-block'});
@@ -382,7 +382,8 @@
           }),
           symbolizer: {
               strokeColor: '#f7ad25',
-              fillColor: '#f7ad25'
+              fillColor: '#f7ad25',
+              fillOpacity: 0
           },
           name: "WMECOHighlightCurr"
       });

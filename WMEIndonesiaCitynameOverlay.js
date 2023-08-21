@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME Kecamatan Overlay
 // @namespace    Komunitas Waze Indonesia
-// @version      2023.08.21.01
+// @version      2023.08.21.02
 // @description  Adds a city overlay for Indonesia Area
 // @author       hardian-n
 // @include      /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/?.*$/
@@ -252,7 +252,7 @@
 
   function init() {
       _ID_States = {
-          "Aceh":"ACEH", "Kepulauan Bangka Belitung":"BABEL", "Bali":"BALI", "Banten":"BANTEN", "DI Yogyakarta":"DIY", "Bengkulu":"BENGKULU", "DKI Jakarta":"DKI", "Gorontalo":"GORONTALO", "Jawa Barat":"JABAR", "Jambi":"JAMBI", "Jawa Tengah":"JATENG", "Jawa Timur":"JATIM", "Kalimantan Barat":"KALBAR", "Kalimantan Selatan": "KALSEL", "Kalimantan Utara":"KALTARA", "Kalimantan Tengah":"KALTENG", "Kalimantan Timur":"KALTIM", "Lampung":"LAMPUNG", "Maluku":"MALUKU", "Maluku Utara":"MU", "Nusa Tenggara Barat":"NTB", "Nusa Tenggara Timur":"NTT", "Riau":"RIAU", "Kepulauan Riau":"KEPRI", "Papua Barat":"PAPUABARAT", "Sumatra Selatan":"SUMSEL",
+          "Aceh":"ACEH", "Kepulauan Bangka Belitung":"BABEL", "Bali":"BALI", "Banten":"BANTEN", "DI Yogyakarta":"DIY", "Bengkulu":"BENGKULU", "DKI Jakarta":"DKI", "Gorontalo":"GORONTALO", "Jawa Barat":"JABAR", "Jambi":"JAMBI", "Jawa Tengah":"JATENG", "Jawa Timur":"JATIM", "Kalimantan Barat":"KALBAR", "Kalimantan Selatan": "KALSEL", "Kalimantan Utara":"KALTARA", "Kalimantan Tengah":"KALTENG", "Kalimantan Timur":"KALTIM", "Lampung":"LAMPUNG", "Maluku":"MALUKU", "Maluku Utara":"MU", "Nusa Tenggara Barat":"NTB", "Nusa Tenggara Timur":"NTT", "Riau":"RIAU", "Kepulauan Riau":"KEPRI", "Papua Barat":"PAPUABARAT", "Sumatra Selatan":"SUMSEL", "Sulawesi Barat":"SULBAR", "Sulawesi Selatan":"SULSEL", "Sulawesi Tengah":"SULTENG", "Sulawesi Tenggara":"SULTRA", "Sulawesi Utara":"SULUT",
               getAbbreviation: function(state) { return this[state];},
               getStateFromAbbr: function(abbr) { return Object.entries(_ID_States).filter(x => {if(x[1] == abbr) return x})[0][0];},
               getStatesArray: function() { return Object.keys(_ID_States).filter(x => {if(typeof _ID_States[x] !== "function") return x;});},

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME Kecamatan Overlay
 // @namespace    Komunitas Waze Indonesia
-// @version      2023.08.21.03
+// @version      2023.08.30.01
 // @description  Adds a city overlay for Indonesia Area
 // @author       hardian-n
 // @include      /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/?.*$/
@@ -113,10 +113,8 @@
           currCity = newCurrCity;
           _layer.redraw();
       }
-      console.log('Mulai update:', 'updateCityPolygons');
       await updateCityPolygons();
       updateDistrictNameDisplay();
-
   }
 
   function updateDistrictNameDisplay(){
@@ -187,7 +185,6 @@
 
       let KMLinfoArr = await fetch(`https://api.github.com/repos/hardian-n/Waze_Cityname_Indonesia/contents/KMLs/${countryAbbr}`);
       KMLinfoArr = $.parseJSON(KMLinfoArr);
-      console.log('KMLinfoArr:', KMLinfoArr);
       let state;
       for(let i=0; i<keys.length; i++){
           state = keys[i];
@@ -253,10 +250,10 @@
   function init() {
       _ID_States = {
           "Aceh":"ACEH", "Kepulauan Bangka Belitung":"BABEL", "Bali":"BALI", "Banten":"BANTEN", "DI Yogyakarta":"DIY", "Bengkulu":"BENGKULU", "DKI Jakarta":"DKI", "Gorontalo":"GORONTALO", "Jawa Barat":"JABAR", "Jambi":"JAMBI", "Jawa Tengah":"JATENG", "Jawa Timur":"JATIM", "Kalimantan Barat":"KALBAR", "Kalimantan Selatan": "KALSEL", "Kalimantan Utara":"KALTARA", "Kalimantan Tengah":"KALTENG", "Kalimantan Timur":"KALTIM", "Lampung":"LAMPUNG", "Maluku":"MALUKU", "Maluku Utara":"MU", "Nusa Tenggara Barat":"NTB", "Nusa Tenggara Timur":"NTT", "Riau":"RIAU", "Kepulauan Riau":"KEPRI", "Papua Barat":"PAPUABARAT", "Sumatra Selatan":"SUMSEL", "Sulawesi Barat":"SULBAR", "Sulawesi Selatan":"SULSEL", "Sulawesi Tengah":"SULTENG", "Sulawesi Tenggara":"SULTRA", "Sulawesi Utara":"SULUT",
-              getAbbreviation: function(state) { return this[state];},
-              getStateFromAbbr: function(abbr) { return Object.entries(_ID_States).filter(x => {if(x[1] == abbr) return x})[0][0];},
-              getStatesArray: function() { return Object.keys(_ID_States).filter(x => {if(typeof _ID_States[x] !== "function") return x;});},
-              getStateAbbrArray: function() { return Object.values(_ID_States).filter(x => {if(typeof x !== "function") return x;});}};
+          getAbbreviation: function(state) { return this[state];},
+          getStateFromAbbr: function(abbr) { return Object.entries(_ID_States).filter(x => {if(x[1] == abbr) return x})[0][0];},
+          getStatesArray: function() { return Object.keys(_ID_States).filter(x => {if(typeof _ID_States[x] !== "function") return x;});},
+          getStateAbbrArray: function() { return Object.values(_ID_States).filter(x => {if(typeof x !== "function") return x;});}};
 
       loadSettings();
 
@@ -420,14 +417,11 @@
   }
 
   async function updateCityPolygons(){
-      if(currState != W.model.states.top.name)
+      if(currState != W.model.states.top.attributes.name)
       {
-          console.log('currState:', currState);
-          console.log('W.model.states.top.name:', W.model.states.top.name);
-          
           _layer.destroyFeatures();
-          currState = W.model.states.top.name;
-          let countryAbbr = W.model.countries.top.abbr;
+          currState = W.model.states.top.attributes.name;
+          let countryAbbr = W.model.countries.top.attributes.abbr;
           let stateAbbr;
 
           if(countryAbbr === "ID")
@@ -436,20 +430,12 @@
           if(typeof stateAbbr !== "undefined"){
               if(typeof kmlCache[stateAbbr] == 'undefined'){
                   //get the current state info from the store.
-
-                  console.log('countryAbbr:', countryAbbr);
-                  console.log('stateAbbr:', stateAbbr);
-                  console.log('idbKeyval:', idbKeyval);
-                  console.log('array:', `${countryAbbr}_states_cities`);
-
                   var request = await idbKeyval.get(`${countryAbbr}_states_cities`, stateAbbr);
-                  console.log('request:', request);
 
                   //if the store didn't have the state, look it up from github and enter it in the store
                   if(!request){
                       let kml = await fetch(`https://raw.githubusercontent.com/${repoOwner}/Waze_Cityname_Indonesia/master/KMLs/${countryAbbr}/${stateAbbr}_Cities.kml`);
                       _kml = kml;
-                      console.log('kml:', 'dapet kml');
                       updatePolygons();
 
                       await idbKeyval.set(`${countryAbbr}_states_cities`, {

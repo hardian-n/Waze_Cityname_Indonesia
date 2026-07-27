@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/hardian-n/Waze_Cityname_Indonesia/master/WMEIndonesiaCitynameOverlay.js">
+  <a href="https://greasyfork.org/id/scripts/7628-wme-kecamatan-overlay">
     <img src="https://img.shields.io/badge/Install-Userscript-00bcd4?style=for-the-badge" alt="Install Userscript">
   </a>
   <img src="https://img.shields.io/badge/license-GPLv3-blue?style=for-the-badge" alt="GPLv3 License">
@@ -46,10 +46,10 @@ Sebelum memasang script, siapkan:
 
 ## Instalasi
 
-1. Pasang Tampermonkey atau Violentmonkey pada browser.
+1. Pasang Tampermonkey pada browser.
 2. Klik tombol **Install Userscript** di bagian atas README ini, atau buka file berikut:
 
-   [WMEIndonesiaCitynameOverlay.js](https://raw.githubusercontent.com/hardian-n/Waze_Cityname_Indonesia/master/WMEIndonesiaCitynameOverlay.js)
+   [WME Kecamatan Overlay](https://greasyfork.org/id/scripts/7628-wme-kecamatan-overlay)
 
 3. Pengelola userscript akan menampilkan halaman instalasi.
 4. Klik **Install**.

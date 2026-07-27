@@ -13,7 +13,9 @@
     <img src="https://img.shields.io/badge/Install-Userscript-00bcd4?style=for-the-badge" alt="Install Userscript">
   </a>
   <img src="https://img.shields.io/badge/license-GPLv3-blue?style=for-the-badge" alt="GPLv3 License">
-  <img src="https://img.shields.io/badge/Waze-Map%20Editor-33ccff?style=for-the-badge" alt="Waze Map Editor">
+  <a href="https://www.waze.com/editor">
+    <img src="https://img.shields.io/badge/Waze-Map%20Editor-33ccff?style=for-the-badge" alt="Waze Map Editor">
+  </a>
 </p>
 
 ## Tentang proyek

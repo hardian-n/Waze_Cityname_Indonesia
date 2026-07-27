@@ -41,7 +41,7 @@ Project ini ditujukan untuk membantu editor Waze Indonesia mengenali area kerja 
 Sebelum memasang script, siapkan:
 
 1. Browser berbasis Chromium atau Firefox.
-2. Extension pengelola userscript, seperti **Tampermonkey** atau **Violentmonkey**.
+2. Extension pengelola userscript, seperti **Tampermonkey**.
 3. Akun yang dapat mengakses [Waze Map Editor](https://www.waze.com/editor).
 
 ## Instalasi

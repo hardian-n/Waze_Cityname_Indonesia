@@ -184,4 +184,4 @@ Userscript ini menggunakan lisensi **GNU General Public License v3.0 (GPLv3)** s
 
 ## Author
 
-Dikembangkan oleh [Hardian Nurhadi](https://github.com/hardian-n) untuk komunitas editor Waze Indonesia.
+Dikembangkan oleh [Hardian Nurhadi / Waze ID: hardian_n](https://www.waze.com/user/editor/hardian_n) untuk komunitas editor Waze Indonesia.
